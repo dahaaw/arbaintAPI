@@ -19,6 +19,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    client: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
     salt: {
       type: DataTypes.STRING(10),
       allowNull: false
@@ -27,11 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    first: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    last: {
+    fullname: {
       type: DataTypes.STRING(50),
       allowNull: false
     },

@@ -1,4 +1,4 @@
-const {uyah, encPass, createToken} = require('./encryption.svc');
+const {uyah, encPass, createToken} = require('../../../utils/encryption');
 
 const runModel = require('./../../../models');
 const db = runModel();
@@ -15,8 +15,7 @@ exports.register = async (req,res) => {
         const password  = req.body.password; 
         const repassword= req.body.repassword; 
         const salt      = uyah(); 
-        const first     = req.body.first;
-        const last      = req.body.last;
+        const fullname  = req.body.fullname;
         const birthdate = req.body.birthdate;
         const gender    = req.body.gender;
 
@@ -26,8 +25,7 @@ exports.register = async (req,res) => {
             email,
             salt,
             password : encPass(password,salt),
-            first,
-            last,
+            fullname,
             gender,
             birthdate
         }
@@ -52,21 +50,21 @@ exports.register = async (req,res) => {
                     final = {
                         success : false,
                         code    : 200,
-                        message : 'username sudah pernah digunakan'
+                        message : {0:'username sudah pernah digunakan'}
                     }
                 }
             }else{
                 final = {
                     success : false,
                     code    : 200,
-                    message : 'Email sudah terdaftar'    
+                    message : {0:'email sudah terdaftar'}    
                 }
             }
         }else{
             final = {
                 success : false,
                 code    : 200,
-                message : 'password tidak sama'
+                message : {0:'password tidak sama'}
             }
         }
         res.status(final.code).json(final);

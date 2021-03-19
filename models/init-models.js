@@ -8,6 +8,10 @@ function initModels(sequelize) {
   var user_token = _user_token(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
 
+  user_address.belongsTo(users, { as: "idUser_user", foreignKey: "idUser"});
+  users.hasMany(user_address, { as: "user_addresses", foreignKey: "idUser"});
+  user_token.belongsTo(users, { as: "idUser_user", foreignKey: "idUser"});
+  users.hasMany(user_token, { as: "user_tokens", foreignKey: "idUser"});
 
   return {
     user_address,

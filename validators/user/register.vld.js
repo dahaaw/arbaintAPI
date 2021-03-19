@@ -5,22 +5,30 @@ exports.registerVld = [
         .trim()
         .not()
         .isEmpty()
-        .withMessage('username is required!'),
+        .withMessage('username harus diisi !'),
 
     check('email')
         .trim()
         .not()
         .isEmpty()
-        .withMessage('email is required')
+        .withMessage('email harus diisi !')
         .normalizeEmail()
         .isEmail()
-        .withMessage('correct your email'),
+        .withMessage('masukkan email dengan benar'),
+    
+    check('fullname')
+        .trim()
+        .not()
+        .isEmpty()
+        .withMessage('nama lengkap depan harus diisi !')
+        .matches(/^[A-Za-z\s]+$/)
+        .withMessage('nama lengkap depan harus alfabet.'),
 
     check('password')
         .trim()
         .not()
         .isEmpty()
-        .withMessage("password is required!")
+        .withMessage("password harus diisi !")
         .isLength({min:8})
         .withMessage("password min 8 characters long!"),
 
@@ -28,37 +36,20 @@ exports.registerVld = [
         .trim()
         .not()
         .isEmpty()
-        .withMessage("repassword is required!"),
-    
-    check('first')
-        .trim()
-        .not()
-        .isEmpty()
-        .withMessage('first is required!')
-        .matches(/^[A-Za-z\s]+$/)
-        .withMessage('Name must be alphabetic.'),
-
-    check('last')
-        .trim()
-        .not()
-        .isEmpty()
-        .withMessage("last is required!")
-        .matches(/^[A-Za-z\s]+$/)
-        .withMessage('Name must be alphabetic.'),
-         
+        .withMessage("konfirmasi password harus diisi !"),
     check('birthdate')
         .trim()
         .not()
         .isEmpty()
-        .withMessage('birthdate is required')
+        .withMessage('tanggal lahir harus diisi !')
         .isISO8601()
         .toDate()
-        .withMessage('correct birthdate'),
+        .withMessage('periksa kembali tanggal lahir'),
 
     check('gender')
         .trim()
         .not()
         .isEmpty()
-        .withMessage('gender is required')
+        .withMessage('gender harus diisi !')
 ]; 
 

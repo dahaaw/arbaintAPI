@@ -9,10 +9,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     idUser: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     token: {
       type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    category: {
+      type: DataTypes.STRING(30),
       allowNull: false
     },
     used: {
@@ -30,6 +38,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "idUser",
+        using: "BTREE",
+        fields: [
+          { name: "idUser" },
         ]
       },
     ]

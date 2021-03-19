@@ -5,7 +5,7 @@ const sequelize = dbConnect();
 // console.log("All models were synchronized successfully.");
 
 const runModel = () => {
-    return initModels(sequelize);
+    return  initModels(sequelize);
 }
 
 module.exports = runModel;

@@ -1,5 +1,5 @@
 const sha1 = require('sha1')
-const runModel = require('./../../../models');
+const runModel = require('../models');
 const db = runModel();
 
 // CREATE SALT
@@ -30,12 +30,12 @@ const createToken = async (idUser, category) => {
 }
 exports.createToken = createToken;
 
-// GET SALT AND PASSWORD ADMIN
-// const getUyPassAdmin = async (wherenya) => {
-//     const dada = await admin.findOne({
-//         where:wherenya,
-//         attributes:  ['password','salt'] 
-//     });
-//     return dada;
-// }
-// exports.getUyPassAdmin = getUyPassAdmin;
+// GET SALT AND PASSWORD
+const getUyPass = async (wherenya) => {
+    const user = await db.users.findOne({
+        where:wherenya,
+        attributes:  ['password','salt'] 
+    });
+    return user;
+}
+exports.getUyPass = getUyPass;
