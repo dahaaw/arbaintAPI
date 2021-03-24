@@ -15,9 +15,10 @@ exports.register = async (req,res) => {
         const password  = req.body.password; 
         const repassword= req.body.repassword; 
         const salt      = uyah(); 
-        const fullname  = req.body.fullname;
+        const fullname  = req.body.fullname.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
         const birthdate = req.body.birthdate;
         const gender    = req.body.gender;
+        const client    = req.body.client;
 
         const dataUser = {
             point : 0,
@@ -27,6 +28,7 @@ exports.register = async (req,res) => {
             password : encPass(password,salt),
             fullname,
             gender,
+            client,
             birthdate
         }
 

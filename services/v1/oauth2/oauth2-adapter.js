@@ -21,14 +21,21 @@ function obtainToken(req, res) {
             return res
                 .cookie("access_token", accessToken, { expires: accessTokenExpiresAt, httpOnly: true })
                 .cookie("refresh_token", refreshToken, { expires: refreshTokenExpiresAt, httpOnly: true })
-                .json({ access_token: accessToken, refresh_token: refreshToken, clientId: client.id });
+                .json({
+                        access_token: accessToken, 
+                        refresh_token: refreshToken, 
+                        clientId: client.id,
+                        expires: accessTokenExpiresAt
+                });
         })
         .catch((err) => {
+            if(req.body.username === '' || req.body.password === ''){ message = {0 : 'username dan password harus diisi'} }
+            else{ message = { 0 : 'email atau password salah'}}
             // res.status(err.code || 500).json(err)
-            res.status(400).json({
+            res.status(200).json({
                 success: false,
                 status:err.code||400,
-                message: {0:'user tidak ada'}
+                message
             })
         });
 }
